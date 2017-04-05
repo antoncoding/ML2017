@@ -88,4 +88,4 @@ output.columns = ['label']
 output = output.rename_axis('id')
 output.reset_index(level=0,inplace=True)
 output['id'] = output['id'].apply(int)+1
-output.to_csv(prediction_file),index=False)
+output.to_csv(prediction_file,index=False)
