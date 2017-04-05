@@ -35,7 +35,7 @@ theta = np.zeros(feature_count)
 sigma = np.ones(feature_count)
 num_iters = 800
 
-lr, r = 0.017
+lr, r = 0.017, 0
 
 for i in range(num_iters+1):
 	for n in range(len(X)):
