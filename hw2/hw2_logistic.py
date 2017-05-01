@@ -22,8 +22,8 @@ def read_file_and_normalize(file_name):
 	data.insert(0,'Ones',1)
 	return data
 
-X = read_file_and_normalize('train_file_X')
-y = pd.read_csv('train_file_y',header=None)
+X = read_file_and_normalize(train_file_X)
+y = pd.read_csv(train_file_y,header=None)
 
 train_size = X.shape[0]
 feature_count = X.shape[1]
