@@ -21,37 +21,40 @@ K.set_image_dim_ordering('th')
 test_file_path = sys.argv[1]
 output_file_path = sys.argv[2]
 
-# def train_model():
-#     # create model
-#     model = Sequential()
-#     model.add(Conv2D(32, (3, 3), input_shape=(1,48,48), activation='relu',padding='same'))
-#     model.add(Dropout(0.2))
-#     model.add(Conv2D(64, (3, 3), activation='relu', padding='same'))
-#     model.add(MaxPooling2D(pool_size=(2, 2),strides=(2,2)))
-#     model.add(Dropout(0.2))
-    
-#     model.add(Conv2D(64, (3, 3), activation='relu', padding='same'))
-#     model.add(Dropout(0.3))
-#     model.add(Conv2D(128, (3, 3), activation='relu', padding='same'))
-#     model.add(MaxPooling2D(pool_size=(2, 2),strides=(2,2)))
-    
-#     model.add(Conv2D(128, (3, 3), activation='relu', padding='same'))
-#     model.add(Dropout(0.35))
-#     model.add(Conv2D(256, (3, 3), activation='relu', padding='same'))
-#     model.add(MaxPooling2D(pool_size=(2, 2),strides=(2,2)))
-#     model.add(Conv2D(256, (3, 3), activation='relu', padding='same'))
-#     model.add(Dropout(0.3))
-    
-#     model.add(Flatten())
-#     model.add(Dropout(0.4))
-    
-#     model.add(Dense(1024, activation='relu'))
-#     model.add(Dropout(0.45))
-#     model.add(Dense(num_classes, activation='softmax'))
+
+opt = Adam(lr=0.00025)
+
+def train_model():
+    # create model
+    model = Sequential()
+    model.add(Conv2D(32, (3, 3), input_shape=(1,48,48), activation='relu',padding='same'))
+    model.add(Dropout(0.2))
+    model.add(Conv2D(64, (3, 3), activation='relu', padding='same'))
+    model.add(MaxPooling2D(pool_size=(2, 2),strides=(2,2)))
+    model.add(Dropout(0.2))
    
-#     # Compile model
-#     model.compile(loss='categorical_crossentropy', optimizer=opt, metrics=['accuracy'])
-#     return model
+    model.add(Conv2D(64, (3, 3), activation='relu', padding='same'))
+    model.add(Dropout(0.3))
+    model.add(Conv2D(128, (3, 3), activation='relu', padding='same'))
+    model.add(MaxPooling2D(pool_size=(2, 2),strides=(2,2)))
+   
+    model.add(Conv2D(128, (3, 3), activation='relu', padding='same'))
+    model.add(Dropout(0.35))
+    model.add(Conv2D(256, (3, 3), activation='relu', padding='same'))
+    model.add(MaxPooling2D(pool_size=(2, 2),strides=(2,2)))
+    model.add(Conv2D(256, (3, 3), activation='relu', padding='same'))
+    model.add(Dropout(0.3))
+    
+    model.add(Flatten())
+    model.add(Dropout(0.4))
+    
+    model.add(Dense(1024, activation='relu'))
+    model.add(Dropout(0.45))
+    model.add(Dense(7, activation='softmax'))
+   
+    # Compile model
+    model.compile(loss='categorical_crossentropy', optimizer=opt, metrics=['accuracy'])
+    return model
 
     
 
@@ -74,7 +77,9 @@ output_file_path = sys.argv[2]
 #                     epochs=pre_train_epochs,
 #                     validation_data=(X_test, y_test))
 
-model = load_model('whole_model.h5')
+model = train_model()
+model.load_weights("model_weight.h5")
+
 
 # # write ouput file
 with open(test_file_path,'r') as dest_f:
