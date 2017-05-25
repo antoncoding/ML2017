@@ -53,7 +53,6 @@ test_X = []
 
 for i in range(200):
     data_set = testdata[str(i)]
-    print(data_set.shape)
     vs = get_eigenvalues(data_set)
     test_X.append(vs)
 
