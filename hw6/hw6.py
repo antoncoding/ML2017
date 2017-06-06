@@ -24,7 +24,7 @@ colum_list = list(R_df.columns)
 
 with open(output_path,'w') as outfile:
     print('TestDataID,Rating',file=outfile)
-    test_file = pd.read_csv('data/test.csv')
+    test_file = pd.read_csv( data_dir + 'test.csv')
     for idx, row in test_file.iterrows():
         try:
             rating = nR[row['UserID']-1, colum_list.index(row['MovieID'])]
